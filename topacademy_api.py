@@ -13,7 +13,7 @@ class JournalApi:
     def _get(self, endpoint, method):
         url = f"https://msapi.top-academy.ru/api/v2/{endpoint}"
         try:
-            r = response = self.session.request(method, url=url)
+            r = self.session.request(method, url=url)
             r.raise_for_status()
             return r.json()
         except requests.RequestException as e:
