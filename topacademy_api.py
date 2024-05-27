@@ -18,3 +18,8 @@ class JournalApi():
         url = f"https://msapi.top-academy.ru/api/v2/schedule/operations/get-month?date_filter={date}"
         r = requests.get(url, headers=self.headers)
         return r.json()
+
+    def get_schedule_day(self, date):
+        url = f"https://msapi.top-academy.ru/api/v2/schedule/operations/get-by-date?date_filter={date}"
+        r = requests.get(url, headers=self.headers)
+        return r.json()
