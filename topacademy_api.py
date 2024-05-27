@@ -23,3 +23,14 @@ class JournalApi():
         url = f"https://msapi.top-academy.ru/api/v2/schedule/operations/get-by-date?date_filter={date}"
         r = requests.get(url, headers=self.headers)
         return r.json()
+
+
+class OmniApi():
+    def __init__(self, cookie):
+        self.cookie = cookie
+
+    def get_rooms(self): # TODO
+        pass
+
+    def get_schedule(self): # TODO
+        pass
