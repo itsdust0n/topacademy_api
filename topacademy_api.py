@@ -1,31 +1,33 @@
 import requests
 
 
-class JournalApi():
+class JournalApi:
     def __init__(self, authorization):
-        self.headers = {
+        self.BASE_URL = 'https://msapi.top-academy.ru/api/v2'
+        self.session = requests.Session()
+        self.session.headers.update({
             "authorization": f"{authorization}",
             "referer": "https://journal.top-academy.ru/"
-        }
+        })
 
     def get_future_exams(self):
-        url = "https://msapi.top-academy.ru/api/v2/dashboard/info/future-exams"
-        r = requests.get(url, headers=self.headers)
+        r = self.session.get(f"{self.BASE_URL}/dashboard/info/future-exams")
+        r.raise_for_status()
         return r.json()
 
     def get_attendance(self):
-        url = "https://msapi.top-academy.ru/api/v2/dashboard/chart/attendance"
-        r = requests.get(url, headers=self.headers)
+        r = self.session.get(f"{self.BASE_URL}/dashboard/chart/attendance")
+        r.raise_for_status()
         return r.json()
 
     def get_schedule_month(self, date):
-        url = f"https://msapi.top-academy.ru/api/v2/schedule/operations/get-month?date_filter={date}"
-        r = requests.get(url, headers=self.headers)
+        r = self.session.get(f"{self.BASE_URL}/schedule/operations/get-month?date_filter={date}")
+        r.raise_for_status()
         return r.json()
 
     def get_schedule_day(self, date):
-        url = f"https://msapi.top-academy.ru/api/v2/schedule/operations/get-by-date?date_filter={date}"
-        r = requests.get(url, headers=self.headers)
+        r = self.session.get(f"{self.BASE_URL}/schedule/operations/get-by-date?date_filter={date}")
+        r.raise_for_status()
         return r.json()
 
 
