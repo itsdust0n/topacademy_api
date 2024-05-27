@@ -19,7 +19,6 @@ class JournalApi:
         except requests.RequestException as e:
             logging.error(f'Request to {url} failed: {e}')
 
-
     def get_future_exams(self):
         return self._get("dashboard/info/future-exams", "GET")
 
@@ -27,10 +26,10 @@ class JournalApi:
         return self._get("dashboard/chart/attendance", "GET")
 
     def get_schedule_month(self, date):
-        return self._get(f"schedule/operations/get-month?date_filter={date}")
+        return self._get(f"schedule/operations/get-month?date_filter={date}", "GET")
 
     def get_schedule_day(self, date):
-        return self._get(f"schedule/operations/get-by-date?date_filter={date}")
+        return self._get(f"schedule/operations/get-by-date?date_filter={date}", "GET")
 
 
 class OmniApi():
