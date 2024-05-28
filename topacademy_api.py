@@ -52,6 +52,9 @@ class JournalApi:
     def get_user_info(self):
         return self._get("https://msapi.top-academy.ru/api/v2/settings/user-info", "GET")
 
+    def get_average_grade(self):
+        return self._get("https://msapi.top-academy.ru/api/v2/dashboard/chart/average-progress", "GET")
+
 
 class OmniApi():
     def __init__(self, cookie):
