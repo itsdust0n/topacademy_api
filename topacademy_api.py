@@ -49,6 +49,9 @@ class JournalApi:
     def get_schedule_day(self, date):
         return self._get(f"schedule/operations/get-by-date?date_filter={date}", "GET")
 
+    def get_user_info(self):
+        return self._get("https://msapi.top-academy.ru/api/v2/settings/user-info", "GET")
+
 
 class OmniApi():
     def __init__(self, cookie):
