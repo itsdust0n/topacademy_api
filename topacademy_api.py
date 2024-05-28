@@ -3,12 +3,27 @@ import logging
 
 
 class JournalApi:
-    def __init__(self, authorization):
-        self.session = requests.Session()
-        self.session.headers.update({
-            "authorization": f"{authorization}",
-            "referer": "https://journal.top-academy.ru/"
-        })
+    def __init__(self, login, password):
+        self.login = login
+        self.password = password
+        try:
+            payload = '{"application_key":"6a56a5df2667e65aab73ce76d1dd737f7d1faef9c52e8b8c55ac75f565d8e8a6","id_city":null,"password":"' + password + '","username":"' + login +'"}'
+            headers = {
+                "referer": "https://journal.top-academy.ru/",
+                "Content-type": "application/json"
+            }
+            r = requests.post("https://msapi.top-academy.ru/api/v2/auth/login", data=payload, headers=headers)
+            r.raise_for_status()
+            data = r.json()
+            self.token = data['access_token']
+            if self.token not in [None, ""]:
+                self.session = requests.Session()
+                self.session.headers.update({
+                    "authorization": f"Bearer {self.token}",
+                    "referer": "https://journal.top-academy.ru/"
+                })
+        except requests.RequestException as e:
+            logging.error(f"Error while authorization: {e}")
 
     def _get(self, endpoint, method):
         url = f"https://msapi.top-academy.ru/api/v2/{endpoint}"
@@ -18,6 +33,9 @@ class JournalApi:
             return r.json()
         except requests.RequestException as e:
             logging.error(f'Request to {url} failed: {e}')
+
+    def get_token(self):
+        return self.token
 
     def get_future_exams(self):
         return self._get("dashboard/info/future-exams", "GET")
