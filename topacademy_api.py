@@ -58,6 +58,9 @@ class JournalApi:
     def get_group_leaders(self):
         return self._get("dashboard/progress/leader-group", "GET")
 
+    def get_homework_counters(self):
+        return self._get("count/homework", "GET")
+
 
 class OmniApi():
     def __init__(self, cookie):
