@@ -50,10 +50,13 @@ class JournalApi:
         return self._get(f"schedule/operations/get-by-date?date_filter={date}", "GET")
 
     def get_user_info(self):
-        return self._get("https://msapi.top-academy.ru/api/v2/settings/user-info", "GET")
+        return self._get("settings/user-info", "GET")
 
     def get_average_grade(self):
-        return self._get("https://msapi.top-academy.ru/api/v2/dashboard/chart/average-progress", "GET")
+        return self._get("dashboard/chart/average-progress", "GET")
+
+    def get_group_leaders(self):
+        return self._get("dashboard/progress/leader-group", "GET")
 
 
 class OmniApi():
