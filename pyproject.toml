@@ -4,11 +4,11 @@ version = "1.0"
 description = "A library for Python that provides an easy interface to interact with the TOP Academy resources"
 authors = ["Egor A. Balenko <contact@dust0n.ru>"]
 license = "GPL-2.0"
+readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
 requests = "^2.32.3"
-logging = "^0.4.9.6"
 
 
 [build-system]
